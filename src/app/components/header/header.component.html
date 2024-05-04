@@ -1,1 +1,13 @@
-<p>header works! <i class="fas fa-spinner fa-spin"></i></p>
+<header class="header" [class.is-moving]="isMoving">
+    <div class="logo"></div>
+
+    <i
+        class="icon {{ icon }} fa-heart"
+        aria-hidden="true"
+        (mouseenter)="icon = 'fa'"
+        (mouseleave)="icon = 'fa-regular'">
+        <span class="count">
+            {{ favoritesCount }}
+        </span></i
+    >
+</header>

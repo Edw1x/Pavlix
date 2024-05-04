@@ -1,0 +1,20 @@
+@import 'colors.scss';
+
+@mixin button($background-color: $main, $text-color: $white) {
+    padding: 0.7rem 1.5rem;
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 0.5rem;
+    border-radius: 0.25rem;
+    background-color: $background-color;
+    color: $text-color;
+    cursor: pointer;
+    font-size: clamp(1rem, 4vw, 1.5rem);
+    font-weight: 700;
+
+    &:hover,
+    &:focus {
+        background-color: darken($color: $background-color, $amount: 5%);
+    }
+}

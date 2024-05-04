@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostListener } from '@angular/core';
 
 @Component({
     selector: 'app-header',
@@ -8,4 +8,15 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
     styleUrl: './header.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HeaderComponent {}
+export class HeaderComponent {
+    favoritesCount = 5;
+    icon = 'fa-regular';
+
+    public isMoving = false;
+
+    @HostListener('document:wheel')
+    private onWheel() {
+        const wheelThreshold = 10;
+        this.isMoving = window.scrollY > wheelThreshold;
+    }
+}
