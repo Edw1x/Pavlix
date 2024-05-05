@@ -1,6 +1,5 @@
 @import 'mixins.scss';
-
-$container-width: calc(100% - 3rem);
+@import 'variables.scss';
 
 .page-container {
     display: flex;
@@ -11,23 +10,44 @@ $container-width: calc(100% - 3rem);
     background-color: $black;
 
     section {
-        padding-top: 4rem;
+        padding: 4rem 0;
         display: flex;
         flex-direction: column;
         align-items: center;
+        text-align: center;
+        gap: 1rem;
+        width: $container-width;
     }
 
     .title {
-        font-size: clamp(2rem, 4vw, 3.5rem);
+        font-size: clamp(2rem, 5vw, 4rem);
         font-weight: 900;
         color: $white;
     }
 
     .description {
-        font-size: clamp(1rem, 4vw, 2.5rem);
+        font-size: clamp(1rem, 2.5vw, 1.5rem);
         font-weight: 500;
-        max-width: $container-width;
+        line-height: clamp(1.5rem, 3vw, 2.5rem);
         color: $white;
+    }
+
+    .tile-image {
+        width: 100%;
+    }
+
+    .button {
+        @include button();
+    }
+
+    .text-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+        max-width: $container-width;
+        text-align: center;
     }
 
     .hero-section {
@@ -39,6 +59,7 @@ $container-width: calc(100% - 3rem);
         position: relative;
         height: max-content;
         min-height: 30rem;
+        width: 100%;
 
         .button,
         .text-container {
@@ -70,20 +91,6 @@ $container-width: calc(100% - 3rem);
                 rgba(0, 0, 0, 0.8) 100%
             );
         }
-
-        .text-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 1rem;
-            max-width: $container-width;
-            text-align: center;
-        }
-
-        .button {
-            @include button();
-        }
     }
 
     .divider {
@@ -92,31 +99,165 @@ $container-width: calc(100% - 3rem);
         background-color: rgb(35, 35, 35);
     }
 
+    .device-section,
     .tv-section {
-        position: relative;
-        text-align: center;
-        gap: 1rem;
-        min-height: 30rem;
-        width: $container-width;
-
-        .tv-image {
-            width: 100%;
+        .tile-container {
             z-index: 1;
+            position: relative;
+
+            .video-container {
+                z-index: -1;
+                overflow: hidden;
+                width: 100%;
+                height: 100%;
+                max-width: 74%;
+                max-height: 55%;
+                position: absolute;
+                top: 48%;
+                left: 50%;
+                -webkit-transform: translate(-50%, -50%);
+                -moz-transform: translate(-50%, -50%);
+                -ms-transform: translate(-50%, -50%);
+                transform: translate(-50%, -50%);
+            }
+        }
+    }
+
+    .phone-section {
+        .phone-container {
+            position: relative;
+
+            .phone-image {
+                width: 100%;
+            }
+
+            .download-container {
+                z-index: -1;
+                overflow: hidden;
+                position: absolute;
+                left: 50%;
+                bottom: 8%;
+                -webkit-transform: translateX(-50%);
+                -moz-transform: translateX(-50%);
+                -ms-transform: translateX(-50%);
+                transform: translateX(-50%);
+                margin: 0 auto;
+                background: $black;
+                display: -webkit-box;
+                display: -webkit-flex;
+                display: -ms-flexbox;
+                display: flex;
+                -webkit-align-items: center;
+                -webkit-box-align: center;
+                -ms-flex-align: center;
+                align-items: center;
+                width: 60%;
+                min-width: 15rem;
+                padding: 0.25rem 0.65rem;
+                border: 2px solid rgba(128, 128, 128, 0.7);
+                box-shadow: 0 0 2em 0 rgb(0, 0, 0);
+                border-radius: 0.75rem;
+                z-index: 1;
+
+                .download-image-container {
+                    margin: 0 1rem 0 0;
+
+                    .download-image {
+                        height: 3rem;
+                    }
+                }
+
+                .download-text-container {
+                    text-align: left;
+                    flex-grow: 1;
+                    margin: 0.3rem 0;
+
+                    .label {
+                        color: $white;
+                        font-weight: 500;
+                        font-size: 0.875rem;
+                    }
+
+                    .text {
+                        font-size: 0.75rem;
+                        font-weight: 400;
+                        color: $main;
+                    }
+                }
+
+                .download-icon {
+                    width: 3rem;
+                    height: 3rem;
+                    background: url('/assets/images/download-icon.gif') center center no-repeat;
+                    background-size: contain;
+                }
+            }
+        }
+    }
+
+    .device-section {
+        .tile-container {
+            .video-container {
+                max-width: 64%;
+                max-height: 51%;
+                top: 35%;
+                left: 50%;
+            }
+        }
+    }
+
+    .kids-section {
+        .tile-image {
+            max-width: 40rem;
+        }
+    }
+
+    .questions-section {
+        .accordion {
+            margin: 2rem 0;
+        }
+    }
+}
+
+@media screen and (min-width: 960px) {
+    .page-container {
+        .hero-section {
+            min-height: 45rem;
         }
 
-        .video {
-            overflow: hidden;
-            width: 100%;
-            height: 100%;
-            max-width: 73%;
-            max-height: 54%;
-            position: absolute;
-            top: 69%;
-            left: 50%;
-            -webkit-transform: translate(-50%, -50%);
-            -moz-transform: translate(-50%, -50%);
-            -ms-transform: translate(-50%, -50%);
-            transform: translate(-50%, -50%);
+        section {
+            &:not(.hero-section, .questions-section) {
+                flex-direction: row;
+
+                .text-container {
+                    align-items: flex-start;
+                    text-align: left;
+                    width: 75%;
+                }
+            }
+
+            &.phone-section,
+            &.kids-section {
+                flex-direction: row-reverse !important;
+            }
+        }
+
+        .kids-section {
+            .tile-image {
+                max-width: 25rem;
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 1280px) {
+    .page-container {
+        section {
+            width: $container-desktop-width;
+        }
+
+        .text-container {
+            max-width: $container-desktop-width;
         }
     }
 }

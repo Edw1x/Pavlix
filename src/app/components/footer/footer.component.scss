@@ -1,0 +1,13 @@
+@import 'colors.scss';
+
+:host {
+    margin-top: auto;
+    padding: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $black;
+    font-weight: 900;
+    font-size: 1rem;
+    color: $white;
+}

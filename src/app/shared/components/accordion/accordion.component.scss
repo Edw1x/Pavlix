@@ -1,0 +1,58 @@
+@import 'mixins.scss';
+
+$background-color: $dark-grey;
+
+:host {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 100%;
+}
+
+.item {
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    color: $white;
+    width: 100%;
+    background-color: $background-color;
+    transition: all 0.2s;
+    user-select: none;
+    text-align: left;
+
+    &:hover,
+    &:focus {
+        background-color: lighten($color: $background-color, $amount: 5%);
+        cursor: pointer;
+        transition: all 0.25s cubic-bezier(0.5, 0, 0.1, 1) 0s;
+    }
+
+    .info {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        gap: 0.5rem;
+        align-items: center;
+    }
+}
+
+.content {
+    padding: 0 1.5rem;
+    margin-top: -7px;
+    display: flex;
+    text-align: justify;
+    background-color: $background-color;
+    color: $white;
+    max-height: 0;
+    visibility: collapse;
+    transition: all 0.25s cubic-bezier(0.5, 0, 0.1, 1);
+    white-space: pre-line;
+
+    &.is-visible {
+        padding: 1.5rem;
+        max-height: 75rem;
+        visibility: visible;
+        overflow: hidden;
+        transition: all 0.25s cubic-bezier(0.5, 0, 0.1, 1) 0s;
+    }
+}

@@ -1,19 +1,11 @@
 @import 'colors.scss';
+@import 'variables.scss';
 
 :host {
     position: fixed;
     top: 0;
     width: 100%;
     z-index: 999;
-}
-
-.header {
-    padding: 1.5rem;
-    margin: auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    transition: all 0.2s;
 
     &.is-moving {
         background-color: rgba($color: $black, $alpha: 0.5);
@@ -22,13 +14,24 @@
         box-shadow: 0 3px 5px -2px $main;
         transition: all 0.2s;
     }
+}
+
+.header {
+    padding: 1.5rem 0;
+    margin: auto;
+    width: $container-width;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.2s;
 
     .logo {
-        width: 5rem;
+        width: 100%;
         height: 1.875rem;
         background-size: contain;
         background-repeat: no-repeat;
         background-image: url('/assets/images/logo.svg');
+        cursor: pointer;
     }
 
     .icon {
@@ -41,17 +44,33 @@
             cursor: pointer;
 
             .count {
-                display: none;
+                visibility: hidden;
             }
         }
 
         .count {
-            position: absolute;
-            right: -0.3rem;
+            position: relative;
+            margin-left: -1rem;
+            right: -0.5rem;
             bottom: -0.4rem;
-            color: white;
+            color: $white;
             font-size: 1rem;
             font-weight: 900;
+            user-select: none;
         }
+    }
+}
+
+@media screen and (min-width: 960px) {
+    .header {
+        .logo {
+            height: 3rem;
+        }
+    }
+}
+
+@media screen and (min-width: 1280px) {
+    .header {
+        width: $container-desktop-width;
     }
 }
