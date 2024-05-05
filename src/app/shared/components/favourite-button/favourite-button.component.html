@@ -1,0 +1,11 @@
+<i class="icon {{ icon }} fa-heart" aria-hidden="true" (mouseenter)="icon = 'fa'" (mouseleave)="icon = 'fa-regular'">
+    @if(icon === 'fa-regular' && !showCounter()) {
+      <i class="fa fa-heart overlay" aria-hidden="true"></i>
+    }
+
+    @if(showCounter()) {
+      <span class="count">
+          {{ favoritesCount }}
+      </span>
+    }
+</i>

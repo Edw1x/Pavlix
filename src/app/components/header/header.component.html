@@ -1,13 +1,5 @@
 <header class="header">
     <div class="logo" routerLink="''"></div>
 
-    <i
-        class="icon {{ icon }} fa-heart"
-        aria-hidden="true"
-        (mouseenter)="icon = 'fa'"
-        (mouseleave)="icon = 'fa-regular'">
-        <span class="count">
-            {{ favoritesCount }}
-        </span></i
-    >
+    <app-favourite-button class="button" [showCounter]="true"></app-favourite-button>
 </header>

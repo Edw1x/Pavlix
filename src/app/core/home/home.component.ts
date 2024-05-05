@@ -1,11 +1,12 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { AccordionComponent } from '../../shared/components/accordion/accordion.component';
 import { FAQ } from './home-faq.const';
+import { RouterLink } from '@angular/router';
 
 @Component({
     selector: 'app-home',
     standalone: true,
-    imports: [AccordionComponent],
+    imports: [AccordionComponent, RouterLink],
     templateUrl: './home.component.html',
     styleUrl: './home.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
