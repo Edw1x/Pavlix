@@ -33,6 +33,7 @@ $background-color: $dark-grey;
         justify-content: space-between;
         gap: 0.5rem;
         align-items: center;
+        font-size: clamp(1rem, 2.5vw, 1.5rem);
     }
 }
 
@@ -47,6 +48,7 @@ $background-color: $dark-grey;
     visibility: collapse;
     transition: all 0.25s cubic-bezier(0.5, 0, 0.1, 1);
     white-space: pre-line;
+    font-size: clamp(1rem, 2.5vw, 1.5rem);
 
     &.is-visible {
         padding: 1.5rem;
