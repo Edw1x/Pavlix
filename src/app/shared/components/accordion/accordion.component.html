@@ -1,13 +1,13 @@
 @for (item of items(); track item.title) {
-  <div class="item" #triggerValue (click)="triggerValue.ariaValueNow = triggerValue.ariaValueNow ? '' : item.title">
-      <div class="info">
-          <h1 class="title">{{ item.title }}</h1>
+    <div class="item" #triggerValue (click)="triggerValue.ariaValueNow = triggerValue.ariaValueNow ? '' : item.title">
+        <div class="info">
+            <h1 class="title">{{ item.title }}</h1>
 
-          <i class="fa fa-plus" aria-hidden="true"></i>
-      </div>
-  </div>
+            <i class="fa fa-plus" aria-hidden="true"></i>
+        </div>
+    </div>
 
-  <div class="content" [class.is-visible]="triggerValue.ariaValueNow === item.title">
-      {{ item.description }}
-  </div>
+    <div class="content" [class.is-visible]="triggerValue.ariaValueNow === item.title">
+        {{ item.description }}
+    </div>
 }

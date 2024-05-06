@@ -4,13 +4,13 @@
     (mouseenter)="patchHeartIcon()"
     (mouseleave)="patchHeartIcon()"
     (click)="onTitleToFavouriteMove()">
-      @if(!showCounter()) {
+    @if (!showCounter()) {
         <i class="fa fa-heart overlay" aria-hidden="true"></i>
-      }
+    }
 
-      @if(showCounter()) {
+    @if (showCounter()) {
         <span class="count">
             {{ this.store.favouriteTitles().length }}
         </span>
-      }
+    }
 </i>

@@ -22,21 +22,21 @@
     <div class="divider"></div>
 
     <div class="tiles-container">
-      @if(!!store.titles().length) {
-        @for (title of store.filteredTitlesBySearchQuery(); track title.id) {
-          <app-title-card [card]="title"></app-title-card>
+        @if (!!store.titles().length) {
+            @for (title of store.filteredTitlesBySearchQuery(); track title.id) {
+                <app-title-card [card]="title"></app-title-card>
+            }
         }
-      }
 
-      @if(store.isLoading()) {
-        <app-loading-indicator></app-loading-indicator>
-      }
+        @if (store.isLoading()) {
+            <app-loading-indicator></app-loading-indicator>
+        }
 
-      @if(!store.filteredTitlesBySearchQuery().length && !store.isLoading()) {
-        <span class="no-content">
-          {{ store.searchedText().length ? 'No titles found by your search query' : 'No titles found' }}
-        </span>
-      }
+        @if (!store.filteredTitlesBySearchQuery().length && !store.isLoading()) {
+            <span class="no-content">
+                {{ store.searchedText().length ? 'No titles found by your search query' : 'No titles found' }}
+            </span>
+        }
     </div>
 
     <button class="circle-button" appScrollTop><i class="fa fa-arrow-up" aria-hidden="true"></i></button>
