@@ -1,1 +1,43 @@
-@if (store.selectedTitleDetails()) {}
+@if (details()) {
+    <div class="page-container" [style.background-image]="'url(' + details().big_image">
+        <div class="details-container">
+            <div class="title-container">
+                <h1 class="title">{{ details().title }}</h1>
+                <div class="additional-details">{{ details().year }} &#x2022; {{ details().director }}</div>
+            </div>
+
+            <div class="trailer-container">
+                <iframe
+                    width="100%"
+                    height="100%"
+                    [src]="details().trailer_embed_link! | sanitizer"
+                    modestbranding="0"
+                    controls="0"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen></iframe>
+            </div>
+
+            <div class="title-image" [style.background-image]="'url(' + details().image"></div>
+
+            <div class="general-details">
+                <div class="details">
+                    <div class="pill-container">
+                        @for (genre of details().genre; track $index) {
+                            <div class="pill">{{ genre }}</div>
+                        }
+                    </div>
+
+                    <p class="description">
+                        {{ details().description }}
+                    </p>
+
+                    <span class="rating">
+                        <i class="icon fa fa-star" aria-hidden="true"></i>
+                        <span>{{ details().rating }}<span class="treshold-score">/10</span></span>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+}

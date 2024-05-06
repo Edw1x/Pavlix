@@ -1,15 +1,14 @@
-import { Observable, map, of, pipe, switchMap, tap } from 'rxjs';
+import { map, Observable, of, pipe, switchMap, tap } from 'rxjs';
 
 import { computed, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { tapResponse } from '@ngrx/operators';
 import { patchState, signalStore, withComputed, withHooks, withMethods, withState } from '@ngrx/signals';
+import { rxMethod } from '@ngrx/signals/rxjs-interop';
 
+import { TitleDetails } from '../shared/interfaces/title-details.interface';
 import { TitleModel } from '../shared/interfaces/title.interface';
 import { ApiService } from '../shared/services/api.service';
-
-import { rxMethod } from '@ngrx/signals/rxjs-interop';
-import { TitleDetails } from '../shared/interfaces/title-details.interface';
 
 export type TitlesState = {
     favouriteTitles: TitleModel[];
@@ -77,7 +76,6 @@ export const TitlesStore = signalStore(
                     })
                 );
             },
-            //TODO: REMOVE TITLES FROM PATCH AFTER ALL FIXES
             loadFavouritesTitles: (): Observable<TitleModel[]> => {
                 patchState(state, { isLoading: true });
 
@@ -86,7 +84,7 @@ export const TitlesStore = signalStore(
                         favouriteTitles?.length ? (JSON.parse(favouriteTitles) as TitleModel[]) : []
                     ),
                     tapResponse({
-                        next: favouriteTitles => patchState(state, { favouriteTitles, titles: favouriteTitles }),
+                        next: favouriteTitles => patchState(state, { favouriteTitles }),
                         error: console.error,
                         finalize: () => patchState(state, { isLoading: false }),
                     })
@@ -95,36 +93,12 @@ export const TitlesStore = signalStore(
             getTitleDetails: rxMethod<string>(
                 pipe(
                     tap(() => patchState(state, { isLoading: true })),
-                    switchMap(selectedTitle => {
-                        // const request = selectedTitleId.length
-                        //     ? apiService.getTitleById(selectedTitleId)
-                        //     : of({} as TitleModel);
+                    switchMap(selectedTitleId => {
+                        const request = selectedTitleId.length
+                            ? apiService.getTitleById(selectedTitleId)
+                            : of({} as TitleModel);
 
-                        return of({
-                            rank: 1,
-                            title: 'The Shawshank Redemption',
-                            thumbnail:
-                                'https://m.media-amazon.com/images/M/MV5BMDFkYTc0MGEtZmNhMC00ZDIzLWFmNTEtODM1ZmRlYWMwMWFmXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_UY67_CR0,0,45,67_AL_.jpg',
-                            rating: '9.3',
-                            id: 'top1',
-                            year: 1994,
-                            image: 'https://m.media-amazon.com/images/M/MV5BMDFkYTc0MGEtZmNhMC00ZDIzLWFmNTEtODM1ZmRlYWMwMWFmXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_QL75_UX380_CR0,1,380,562_.jpg',
-                            big_image:
-                                'https://m.media-amazon.com/images/M/MV5BMDFkYTc0MGEtZmNhMC00ZDIzLWFmNTEtODM1ZmRlYWMwMWFmXkEyXkFqcGdeQXVyMTMxODk2OTU@',
-                            description:
-                                'Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency.',
-                            trailer: 'https://www.youtube.com/watch?v=NmzuHjWmXOc',
-                            trailer_embed_link: 'https://www.youtube.com/embed/NmzuHjWmXOc',
-                            trailer_youtube_id: 'NmzuHjWmXOc',
-                            genre: ['Drama'],
-                            director: ['Frank Darabont'],
-                            writers: [
-                                'Stephen King(based on the short novel "Rita Hayworth and the Shawshank Redemption" by)',
-                                'Frank Darabont(screenplay by)',
-                            ],
-                            imdbid: 'tt0111161',
-                            imdb_link: 'https://www.imdb.com/title/tt0111161',
-                        }).pipe(
+                        return request.pipe(
                             tapResponse({
                                 next: selectedTitleDetails =>
                                     patchState(state, { selectedTitleDetails, isLoading: false }),
@@ -141,7 +115,7 @@ export const TitlesStore = signalStore(
     }),
     withHooks({
         onInit({ loadTitles, loadFavouritesTitles, getTitleDetails, selectedTitleId }) {
-            // loadTitles().pipe(takeUntilDestroyed()).subscribe();
+            loadTitles().pipe(takeUntilDestroyed()).subscribe();
             loadFavouritesTitles().pipe(takeUntilDestroyed()).subscribe();
             getTitleDetails(selectedTitleId);
         },

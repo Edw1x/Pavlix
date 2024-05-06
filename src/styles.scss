@@ -1,5 +1,6 @@
 @import 'fonts.scss';
 @import '../node_modules/@fortawesome/fontawesome-free/css/all.min.css';
+@import 'colors.scss';
 
 //resets styles
 * {
@@ -16,4 +17,13 @@
 
 html {
   scroll-behavior: smooth;
+}
+
+.page-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100dvh;
+  background-color: $black;
 }
