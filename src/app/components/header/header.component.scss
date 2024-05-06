@@ -35,9 +35,24 @@
     }
 
     .button {
-      &::ng-deep {
-        position: relative;
-      }
+        &::ng-deep {
+            top: -0.3rem;
+            right: 1.5rem;
+            position: relative;
+        }
+    }
+
+    .link {
+        color: $main;
+        font-size: 2rem;
+        font-weight: 900;
+        text-decoration: none;
+        cursor: pointer;
+
+        &:hover,
+        &:focus {
+            color: lighten($main, 5%);
+        }
     }
 }
 

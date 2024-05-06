@@ -1,11 +1,16 @@
-<i class="icon {{ icon }} fa-heart" aria-hidden="true" (mouseenter)="icon = 'fa'" (mouseleave)="icon = 'fa-regular'">
-    @if(icon === 'fa-regular' && !showCounter()) {
-      <i class="fa fa-heart overlay" aria-hidden="true"></i>
-    }
+<i
+    class="icon {{ icon }} fa-heart"
+    aria-hidden="true"
+    (mouseenter)="patchHeartIcon()"
+    (mouseleave)="patchHeartIcon()"
+    (click)="onTitleToFavouriteMove()">
+      @if(!showCounter()) {
+        <i class="fa fa-heart overlay" aria-hidden="true"></i>
+      }
 
-    @if(showCounter()) {
-      <span class="count">
-          {{ favoritesCount }}
-      </span>
-    }
+      @if(showCounter()) {
+        <span class="count">
+            {{ this.store.favouriteTitles().length }}
+        </span>
+      }
 </i>

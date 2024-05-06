@@ -1,12 +1,7 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 
+import { TitleModel } from '../../interfaces/title.interface';
 import { FavouriteButtonComponent } from '../favourite-button/favourite-button.component';
-
-export interface TitleCard {
-    title: string;
-    image: string;
-    releaseDate: string;
-}
 
 @Component({
     selector: 'app-title-card',
@@ -17,5 +12,5 @@ export interface TitleCard {
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TitleCardComponent {
-    public card = input.required<TitleCard>();
+    public card = input.required<TitleModel>();
 }

@@ -56,11 +56,6 @@
                 color: lighten($dark-grey, 50%);
             }
         }
-
-        .button {
-            @include button();
-            max-width: max-content;
-        }
     }
 
     .hero-section {
@@ -127,6 +122,12 @@
         width: 100%;
         height: 100%;
         flex-grow: 1;
+
+        .no-content {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 900;
+            color: $white;
+        }
     }
 }
 

@@ -1,7 +1,7 @@
 <div aria-hidden="true" [style.background-image]="'url(' + card().image + ')'" class="card-image-container"></div>
 
 <h1 class="card-title">
-    {{ card().title }} | <span class="date">{{ card().releaseDate }}</span>
+    {{ card().title }} ({{ card().year }}) | <span class="rating">{{ card().rating }}</span>
 </h1>
 
-<app-favourite-button></app-favourite-button>
+<app-favourite-button [title]="card()"></app-favourite-button>

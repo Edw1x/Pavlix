@@ -1,8 +1,12 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { debounceTime, distinctUntilChanged, map } from 'rxjs';
 
-import { TitleCard, TitleCardComponent } from '../../shared/components/title-card/title-card.component';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { debounceTime, map } from 'rxjs';
+
+import { LoadingIndicatorComponent } from '../../shared/components/loading-indicator/loading-indicator.component';
+import { TitleCardComponent } from '../../shared/components/title-card/title-card.component';
+import { TitlesStore } from '../../store/titles.store';
+import { ActivatedRoute } from '@angular/router';
 
 export type SearchForm = FormGroup<{
     search: FormControl;
@@ -11,87 +15,34 @@ export type SearchForm = FormGroup<{
 @Component({
     selector: 'app-title-list',
     standalone: true,
-    imports: [TitleCardComponent, ReactiveFormsModule],
+    imports: [TitleCardComponent, ReactiveFormsModule, LoadingIndicatorComponent],
     templateUrl: './title-list.component.html',
     styleUrl: './title-list.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TitleListComponent {
-    private readonly fb = inject(FormBuilder);
+    readonly store = inject(TitlesStore);
 
-    temporaryItems: TitleCard[] = [
-        {
-            title: 'Avatar: The Last Airbender',
-            image: 'https://m.media-amazon.com/images/M/MV5BMTViNTY2MjMtYmUwOC00ZGYxLThjOWEtYjNjZWU3MTYwYzZmXkEyXkFqcGdeQXVyMTEzMTI1Mjk3._V1_.jpg',
-            releaseDate: '2024',
-        },
-        {
-            title: 'James Camerron Avatar',
-            image: 'https://m.media-amazon.com/images/M/MV5BZDA0OGQxNTItMDZkMC00N2UyLTg3MzMtYTJmNjg3Nzk5MzRiXkEyXkFqcGdeQXVyMjUzOTY1NTc@._V1_.jpg',
-            releaseDate: '2009',
-        },
-        {
-            title: 'Top Gun: Maverick',
-            image: 'https://m.media-amazon.com/images/M/MV5BZWYzOGEwNTgtNWU3NS00ZTQ0LWJkODUtMmVhMjIwMjA1ZmQwXkEyXkFqcGdeQXVyMjkwOTAyMDU@._V1_.jpg',
-            releaseDate: '2022',
-        },
-        {
-            title: 'Avatar: The Last Airbender',
-            image: 'https://m.media-amazon.com/images/M/MV5BMTViNTY2MjMtYmUwOC00ZGYxLThjOWEtYjNjZWU3MTYwYzZmXkEyXkFqcGdeQXVyMTEzMTI1Mjk3._V1_.jpg',
-            releaseDate: '2024',
-        },
-        {
-            title: 'James Camerron Avatar',
-            image: 'https://m.media-amazon.com/images/M/MV5BZDA0OGQxNTItMDZkMC00N2UyLTg3MzMtYTJmNjg3Nzk5MzRiXkEyXkFqcGdeQXVyMjUzOTY1NTc@._V1_.jpg',
-            releaseDate: '2009',
-        },
-        {
-            title: 'Top Gun: Maverick',
-            image: 'https://m.media-amazon.com/images/M/MV5BZWYzOGEwNTgtNWU3NS00ZTQ0LWJkODUtMmVhMjIwMjA1ZmQwXkEyXkFqcGdeQXVyMjkwOTAyMDU@._V1_.jpg',
-            releaseDate: '2022',
-        },
-        {
-            title: 'Avatar: The Last Airbender',
-            image: 'https://m.media-amazon.com/images/M/MV5BMTViNTY2MjMtYmUwOC00ZGYxLThjOWEtYjNjZWU3MTYwYzZmXkEyXkFqcGdeQXVyMTEzMTI1Mjk3._V1_.jpg',
-            releaseDate: '2024',
-        },
-        {
-            title: 'James Camerron Avatar',
-            image: 'https://m.media-amazon.com/images/M/MV5BZDA0OGQxNTItMDZkMC00N2UyLTg3MzMtYTJmNjg3Nzk5MzRiXkEyXkFqcGdeQXVyMjUzOTY1NTc@._V1_.jpg',
-            releaseDate: '2009',
-        },
-        {
-            title: 'Top Gun: Maverick',
-            image: 'https://m.media-amazon.com/images/M/MV5BZWYzOGEwNTgtNWU3NS00ZTQ0LWJkODUtMmVhMjIwMjA1ZmQwXkEyXkFqcGdeQXVyMjkwOTAyMDU@._V1_.jpg',
-            releaseDate: '2022',
-        },
-        {
-            title: 'Avatar: The Last Airbender',
-            image: 'https://m.media-amazon.com/images/M/MV5BMTViNTY2MjMtYmUwOC00ZGYxLThjOWEtYjNjZWU3MTYwYzZmXkEyXkFqcGdeQXVyMTEzMTI1Mjk3._V1_.jpg',
-            releaseDate: '2024',
-        },
-        {
-            title: 'James Camerron Avatar',
-            image: 'https://m.media-amazon.com/images/M/MV5BZDA0OGQxNTItMDZkMC00N2UyLTg3MzMtYTJmNjg3Nzk5MzRiXkEyXkFqcGdeQXVyMjUzOTY1NTc@._V1_.jpg',
-            releaseDate: '2009',
-        },
-        {
-            title: 'Top Gun: Maverick',
-            image: 'https://m.media-amazon.com/images/M/MV5BZWYzOGEwNTgtNWU3NS00ZTQ0LWJkODUtMmVhMjIwMjA1ZmQwXkEyXkFqcGdeQXVyMjkwOTAyMDU@._V1_.jpg',
-            releaseDate: '2022',
-        },
-    ];
+    private readonly fb = inject(FormBuilder);
+    private readonly route = inject(ActivatedRoute);
 
     searchForm: SearchForm = this.fb.group({
         search: this.fb.control(''),
     });
 
+    ngOnInit(): void {
+        const isFavourite = this.route.snapshot.data['isFavourite'] as boolean;
+
+        this.store.patchShowFavourite(isFavourite);
+    }
+
     ngAfterViewInit(): void {
         this.searchForm.controls.search.valueChanges
             .pipe(
                 debounceTime(500),
+                distinctUntilChanged(),
                 map((value: string) => value.toLocaleLowerCase())
             )
-            .subscribe(value => console.log(value));
+            .subscribe(value => this.store.patchSearchedText(value));
     }
 }

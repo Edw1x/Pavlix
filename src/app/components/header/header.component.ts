@@ -1,7 +1,8 @@
-import { ChangeDetectionStrategy, Component, HostBinding, HostListener } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostBinding, HostListener, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 import { FavouriteButtonComponent } from '../../shared/components/favourite-button/favourite-button.component';
+import { TitlesStore } from '../../store/titles.store';
 
 @Component({
     selector: 'app-header',
@@ -19,4 +20,7 @@ export class HeaderComponent {
         const wheelThreshold = 10;
         this.isMoving = window.scrollY > wheelThreshold;
     }
+
+    readonly store = inject(TitlesStore);
+
 }

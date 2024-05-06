@@ -9,14 +9,12 @@
         <div class="overlay"></div>
 
         <div class="header-container" [formGroup]="searchForm">
-            <h1 class="title">Find your perfect evening movie</h1>
+            <h1 class="title">
+                {{ store.showFavourites() ? 'Here comes your favourites' : 'Find your perfect evening movie' }}
+            </h1>
 
             <div class="search-container">
                 <input class="input" type="text" formControlName="search" placeholder="Start typing the title" />
-
-                <button class="button" role="button">
-                    Browse <i class="fa fa-magnifying-glass" aria-hidden="true"></i>
-                </button>
             </div>
         </div>
     </section>
@@ -24,8 +22,20 @@
     <div class="divider"></div>
 
     <div class="tiles-container">
-        @for (item of temporaryItems; track item.title) {
-          <app-title-card [card]="item"></app-title-card>
+      @if(!!store.titles().length) {
+        @for (title of store.filteredTitlesBySearchQuery(); track title.id) {
+          <app-title-card [card]="title"></app-title-card>
         }
+      }
+
+      @if(store.isLoading()) {
+        <app-loading-indicator></app-loading-indicator>
+      }
+
+      @if(!store.filteredTitlesBySearchQuery().length && !store.isLoading()) {
+        <span class="no-content">
+          {{ store.searchedText().length ? 'No titles found by your search query' : 'No titles found' }}
+        </span>
+      }
     </div>
 </div>
