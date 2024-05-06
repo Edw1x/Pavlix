@@ -129,6 +129,19 @@
             color: $white;
         }
     }
+
+    .circle-button {
+        z-index: 999;
+        @include button;
+        position: fixed;
+        border-radius: 50%;
+        height: 3rem;
+        width: 3rem;
+        align-items: center;
+        bottom: 2rem;
+        right: 2rem;
+        display: none;
+    }
 }
 
 @media screen and (min-width: 600px) {

@@ -2,11 +2,12 @@ import { debounceTime, distinctUntilChanged, map } from 'rxjs';
 
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 
 import { LoadingIndicatorComponent } from '../../shared/components/loading-indicator/loading-indicator.component';
 import { TitleCardComponent } from '../../shared/components/title-card/title-card.component';
+import { ScrollTopDirective } from '../../shared/directives/scroll-top.directive';
 import { TitlesStore } from '../../store/titles.store';
-import { ActivatedRoute } from '@angular/router';
 
 export type SearchForm = FormGroup<{
     search: FormControl;
@@ -15,7 +16,7 @@ export type SearchForm = FormGroup<{
 @Component({
     selector: 'app-title-list',
     standalone: true,
-    imports: [TitleCardComponent, ReactiveFormsModule, LoadingIndicatorComponent],
+    imports: [TitleCardComponent, ReactiveFormsModule, LoadingIndicatorComponent, ScrollTopDirective],
     templateUrl: './title-list.component.html',
     styleUrl: './title-list.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,

@@ -1,7 +1,7 @@
 import { HttpHeaders, HttpInterceptorFn } from '@angular/common/http';
 
 export const ApiInterceptor: HttpInterceptorFn = (req, next) => {
-    const apiKey = '4f95d93ef0msh5b16dec56c8d16ep152673jsn4f7732b3c507';
+    const apiKey = 'f63c489e7dmshb4cde3113290588p1c7f45jsnc439ec84e3a8';
 
     const headers = new HttpHeaders({
         'X-RapidAPI-Key': apiKey,

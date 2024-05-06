@@ -10,7 +10,7 @@
 
         <div class="header-container" [formGroup]="searchForm">
             <h1 class="title">
-                {{ store.showFavourites() ? 'Here comes your favourites' : 'Find your perfect evening movie' }}
+                {{ store.showFavourites() ? 'Here are your favourites' : 'Find your perfect evening movie' }}
             </h1>
 
             <div class="search-container">
@@ -38,4 +38,6 @@
         </span>
       }
     </div>
+
+    <button class="circle-button" appScrollTop><i class="fa fa-arrow-up" aria-hidden="true"></i></button>
 </div>
