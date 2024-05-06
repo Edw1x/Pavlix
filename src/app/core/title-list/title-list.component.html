@@ -7,19 +7,25 @@
             src="assets/images/hero-background.webp"
             class="hero-image" />
         <div class="overlay"></div>
-        <div class="text-container">
-            <h1 class="title">Find your perfect evening movie</h1>
-        </div>
 
-        <div class="input-container"></div>
-        <button class="button" role="button">Browse <i class="fa fa-magnifying-glass" aria-hidden="true"></i></button>
+        <div class="header-container" [formGroup]="searchForm">
+            <h1 class="title">Find your perfect evening movie</h1>
+
+            <div class="search-container">
+                <input class="input" type="text" formControlName="search" placeholder="Start typing the title" />
+
+                <button class="button" role="button">
+                    Browse <i class="fa fa-magnifying-glass" aria-hidden="true"></i>
+                </button>
+            </div>
+        </div>
     </section>
 
     <div class="divider"></div>
 
     <div class="tiles-container">
         @for (item of temporaryItems; track item.title) {
-        <app-title-card [card]="item"></app-title-card>
+          <app-title-card [card]="item"></app-title-card>
         }
     </div>
 </div>

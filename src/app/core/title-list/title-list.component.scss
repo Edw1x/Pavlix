@@ -20,23 +20,47 @@
         background-color: rgb(35, 35, 35);
     }
 
-    .button {
-        @include button();
-    }
-
-    .text-container {
+    .header-container {
+        z-index: 5;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        gap: 1rem;
+        gap: 3rem;
         max-width: $container-width;
         text-align: center;
     }
 
-    .input-container {
+    .search-container {
+        z-index: 5;
         display: flex;
-        gap: 0.5rem;
+        gap: 1rem;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+
+        .input {
+            display: flex;
+            background: rgba(22, 22, 22, 0.7);
+            border-color: rgba(128, 128, 128, 0.7);
+            width: 100%;
+            color: inherit;
+            padding: 1rem 1.5rem;
+            color: $white;
+            border: 1px solid lighten($dark-grey, 50%);
+            border-radius: 0.25rem;
+            align-items: center;
+
+            &::placeholder {
+                color: lighten($dark-grey, 50%);
+            }
+        }
+
+        .button {
+            @include button();
+            max-width: max-content;
+        }
     }
 
     .hero-section {
@@ -106,14 +130,18 @@
     }
 }
 
+@media screen and (min-width: 600px) {
+    .page-container {
+        .search-container {
+            flex-direction: row;
+        }
+    }
+}
+
 @media screen and (min-width: 1280px) {
     .page-container {
         section {
             width: $container-desktop-width;
-        }
-
-        .text-container {
-            max-width: $container-desktop-width;
         }
     }
 }

@@ -1,16 +1,24 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 
 import { TitleCard, TitleCardComponent } from '../../shared/components/title-card/title-card.component';
+import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { debounceTime, map } from 'rxjs';
+
+export type SearchForm = FormGroup<{
+    search: FormControl;
+}>;
 
 @Component({
     selector: 'app-title-list',
     standalone: true,
-    imports: [TitleCardComponent],
+    imports: [TitleCardComponent, ReactiveFormsModule],
     templateUrl: './title-list.component.html',
     styleUrl: './title-list.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TitleListComponent {
+    private readonly fb = inject(FormBuilder);
+
     temporaryItems: TitleCard[] = [
         {
             title: 'Avatar: The Last Airbender',
@@ -73,4 +81,17 @@ export class TitleListComponent {
             releaseDate: '2022',
         },
     ];
+
+    searchForm: SearchForm = this.fb.group({
+        search: this.fb.control(''),
+    });
+
+    ngAfterViewInit(): void {
+        this.searchForm.controls.search.valueChanges
+            .pipe(
+                debounceTime(500),
+                map((value: string) => value.toLocaleLowerCase())
+            )
+            .subscribe(value => console.log(value));
+    }
 }
