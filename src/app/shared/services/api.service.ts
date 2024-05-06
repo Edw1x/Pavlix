@@ -1,6 +1,9 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
+
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { inject, Injectable } from '@angular/core';
+
+import { TitleDetails } from '../interfaces/title-details.interface';
 import { TitleModel } from '../interfaces/title.interface';
 
 @Injectable({
@@ -13,5 +16,9 @@ export class ApiService {
 
     getTitles(): Observable<TitleModel[]> {
         return this.http.get<TitleModel[]>(this.baseUrl);
+    }
+
+    getTitleById(id: string): Observable<TitleDetails> {
+        return this.http.get<TitleModel>(this.baseUrl + id);
     }
 }
