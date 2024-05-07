@@ -4,6 +4,6 @@
     @if (!store.showFavourites()) {
         <app-favourite-button class="button" routerLink="favourite-titles" [showCounter]="true"></app-favourite-button>
     } @else {
-        <a class="link" routerLink="titles">Titles</a>
+        <i class="icon fa fa-list" aria-hidden="true" routerLink="titles"></i>
     }
 </header>
