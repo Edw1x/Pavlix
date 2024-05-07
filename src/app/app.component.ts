@@ -11,6 +11,4 @@ import { HeaderComponent } from './components/header/header.component';
     templateUrl: './app.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AppComponent {
-    title = 'films';
-}
+export class AppComponent {}

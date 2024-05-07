@@ -1,7 +1,8 @@
+import { Location } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
 
-import { TitlesStore } from '../../store/titles.store';
 import { SanitizerPipe } from '../../shared/pipes/sanitizer.pipe';
+import { TitlesStore } from '../../store/titles.store';
 
 @Component({
     selector: 'app-title-details',
@@ -13,6 +14,7 @@ import { SanitizerPipe } from '../../shared/pipes/sanitizer.pipe';
 })
 export class TitleDetailsComponent {
     public readonly store = inject(TitlesStore);
+    public readonly location = inject(Location);
 
     public details = computed(() => this.store.selectedTitleDetails());
 }

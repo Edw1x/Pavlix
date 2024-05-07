@@ -30,6 +30,8 @@ const initialState: TitlesState = {
     showFavourites: false,
 };
 
+export type TitlesStore = InstanceType<typeof TitlesStore>;
+
 export const TitlesStore = signalStore(
     withState(initialState),
     withComputed(({ searchedText, titles, showFavourites, favouriteTitles }) => ({
@@ -92,7 +94,7 @@ export const TitlesStore = signalStore(
             },
             getTitleDetails: rxMethod<string>(
                 pipe(
-                    tap(() => patchState(state, { isLoading: true })),
+                    tap(() => patchState(state, { isLoading: true, selectedTitleDetails: {} as TitleDetails })),
                     switchMap(selectedTitleId => {
                         const request = selectedTitleId.length
                             ? apiService.getTitleById(selectedTitleId)
