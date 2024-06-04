@@ -11,4 +11,5 @@ export interface TitleModel {
     year: number;
     imdbid: string;
     imdb_link: string;
+    trailer_embed_link?: string;
 }

@@ -9,6 +9,7 @@ import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { TitleDetails } from '../shared/interfaces/title-details.interface';
 import { TitleModel } from '../shared/interfaces/title.interface';
 import { ApiService } from '../shared/services/api.service';
+import { TEMPORARY_STORE_DATA } from './store-temporary-data.const';
 
 export type TitlesState = {
     favouriteTitles: TitleModel[];
@@ -73,7 +74,10 @@ export const TitlesStore = signalStore(
                 return apiService.getTitles().pipe(
                     tapResponse({
                         next: titles => patchState(state, { titles }),
-                        error: console.error,
+                        error: error =>
+                            patchState(state, {
+                                titles: TEMPORARY_STORE_DATA,
+                            }),
                         finalize: () => patchState(state, { isLoading: false }),
                     })
                 );
@@ -105,7 +109,12 @@ export const TitlesStore = signalStore(
                                 next: selectedTitleDetails =>
                                     patchState(state, { selectedTitleDetails, isLoading: false }),
                                 error: err => {
-                                    patchState(state, { isLoading: false });
+                                    patchState(state, {
+                                        isLoading: false,
+                                        selectedTitleDetails: state
+                                            .titles()
+                                            .find(title => title.id === selectedTitleId),
+                                    });
                                     console.error(err);
                                 },
                             })
