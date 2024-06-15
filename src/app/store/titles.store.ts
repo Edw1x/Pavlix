@@ -1,6 +1,7 @@
 import { map, Observable, of, pipe, switchMap, tap } from 'rxjs';
 
-import { computed, inject } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import { computed, inject, PLATFORM_ID } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { tapResponse } from '@ngrx/operators';
 import { patchState, signalStore, withComputed, withHooks, withMethods, withState } from '@ngrx/signals';
@@ -41,7 +42,7 @@ export const TitlesStore = signalStore(
             return titleList().filter(title => title.title.toLocaleLowerCase().includes(searchedText()));
         }),
     })),
-    withMethods((state, apiService = inject(ApiService)) => {
+    withMethods((state, apiService = inject(ApiService), isBrowser = isPlatformBrowser(inject(PLATFORM_ID))) => {
         const { favouriteTitles } = state;
 
         return {
@@ -84,8 +85,13 @@ export const TitlesStore = signalStore(
             },
             loadFavouritesTitles: (): Observable<TitleModel[]> => {
                 patchState(state, { isLoading: true });
+                let titles: string | null = null;
 
-                return of(localStorage.getItem('favouriteTitles')).pipe(
+                if (isBrowser) {
+                    titles = localStorage.getItem('favouriteTitles');
+                }
+
+                return of(titles).pipe(
                     map((favouriteTitles: string | null) =>
                         favouriteTitles?.length ? (JSON.parse(favouriteTitles) as TitleModel[]) : []
                     ),

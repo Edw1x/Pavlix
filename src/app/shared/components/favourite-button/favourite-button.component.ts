@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, input, OnChanges, signal } from '@angular/core';
 
 import { TitlesStore } from '../../../store/titles.store';
 import { TitleModel } from '../../interfaces/title.interface';
@@ -10,15 +10,15 @@ import { TitleModel } from '../../interfaces/title.interface';
     styleUrl: './favourite-button.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FavouriteButtonComponent implements OnInit {
+export class FavouriteButtonComponent implements OnChanges {
     showCounter = input<boolean>(false);
     title = input<TitleModel>();
 
     readonly store = inject(TitlesStore);
 
-    public icon = 'fa-regular';
+    public icon = signal('fa-regular');
 
-    ngOnInit(): void {
+    ngOnChanges(): void {
         this.checkFavouriteTitle();
     }
 
@@ -27,7 +27,7 @@ export class FavouriteButtonComponent implements OnInit {
     }
 
     patchHeartIcon() {
-        this.icon = this.icon === 'fa-regular' ? 'fa' : 'fa-regular';
+        this.icon.set(this.icon() === 'fa-regular' ? 'fa' : 'fa-regular');
     }
 
     onTitleToFavouriteMove(): void {

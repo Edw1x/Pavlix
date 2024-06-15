@@ -7,10 +7,30 @@
             "projectType": "application",
             "schematics": {
                 "@schematics/angular:component": {
-                    "style": "scss"
-                },
-                "component": {
+                    "style": "scss",
+                    "skipTests": true,
                     "changeDetection": "OnPush"
+                },
+                "@schematics/angular:class": {
+                    "skipTests": true
+                },
+                "@schematics/angular:directive": {
+                    "skipTests": true
+                },
+                "@schematics/angular:guard": {
+                    "skipTests": true
+                },
+                "@schematics/angular:interceptor": {
+                    "skipTests": true
+                },
+                "@schematics/angular:pipe": {
+                    "skipTests": true
+                },
+                "@schematics/angular:resolver": {
+                    "skipTests": true
+                },
+                "@schematics/angular:service": {
+                    "skipTests": true
                 }
             },
             "root": "",
@@ -23,13 +43,23 @@
                         "outputPath": "dist/films",
                         "index": "src/index.html",
                         "browser": "src/main.ts",
-                        "polyfills": ["zone.js"],
                         "tsConfig": "tsconfig.app.json",
-                        "assets": ["src/favicon.ico", "src/assets"],
+                        "inlineStyleLanguage": "scss",
+                        "assets": [
+                            {
+                                "glob": "**/*",
+                                "input": "public"
+                            }
+                        ],
                         "styles": ["src/styles.scss", "node_modules/@fortawesome/fontawesome-free/css/all.min.css"],
-                        "scripts": [],
                         "stylePreprocessorOptions": {
-                            "includePaths": ["src/assets/styles"]
+                            "includePaths": ["public/styles"]
+                        },
+                        "scripts": [],
+                        "server": "src/main.server.ts",
+                        "prerender": true,
+                        "ssr": {
+                            "entry": "server.ts"
                         }
                     },
                     "configurations": {
@@ -37,13 +67,13 @@
                             "budgets": [
                                 {
                                     "type": "initial",
-                                    "maximumWarning": "500kb",
-                                    "maximumError": "1mb"
+                                    "maximumWarning": "500kB",
+                                    "maximumError": "1MB"
                                 },
                                 {
                                     "type": "anyComponentStyle",
-                                    "maximumWarning": "2kb",
-                                    "maximumError": "4kb"
+                                    "maximumWarning": "2kB",
+                                    "maximumError": "4kB"
                                 }
                             ],
                             "outputHashing": "all"
@@ -69,17 +99,19 @@
                     "defaultConfiguration": "development"
                 },
                 "extract-i18n": {
-                    "builder": "@angular-devkit/build-angular:extract-i18n",
-                    "options": {
-                        "buildTarget": "films:build"
-                    }
+                    "builder": "@angular-devkit/build-angular:extract-i18n"
                 },
                 "test": {
                     "builder": "@angular-devkit/build-angular:karma",
                     "options": {
-                        "polyfills": ["zone.js", "zone.js/testing"],
                         "tsConfig": "tsconfig.spec.json",
-                        "assets": ["src/favicon.ico", "src/assets"],
+                        "inlineStyleLanguage": "scss",
+                        "assets": [
+                            {
+                                "glob": "**/*",
+                                "input": "public"
+                            }
+                        ],
                         "styles": ["src/styles.scss"],
                         "scripts": []
                     }
@@ -88,6 +120,6 @@
         }
     },
     "cli": {
-        "analytics": false
+        "analytics": "18b0d7e4-c26a-4ef4-978c-9b9976f2c4ac"
     }
 }

@@ -12,7 +12,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
                 height: 4rem;
                 background-size: contain;
                 background-repeat: no-repeat;
-                background-image: url('/assets/icons/spinner.svg');
+                background-image: url('/icons/spinner.svg');
             }
         `,
     ],

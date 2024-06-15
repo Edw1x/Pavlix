@@ -4,7 +4,7 @@
             alt="hero-image"
             aria-hidden="true"
             fetchpriority="high"
-            src="assets/images/hero-background.webp"
+            src="images/hero-background.webp"
             class="hero-image" />
         <div class="overlay"></div>
         <div class="text-container">
@@ -31,90 +31,92 @@
         </div>
 
         <div class="tile-container">
-            <img class="tile-image" alt="tv-image" src="assets/images/tv.webp" />
+            <img class="tile-image" alt="tv-image" src="images/tv.webp" />
 
             <div class="video-container">
                 <video autoplay playsinline muted loop>
-                    <source src="assets/videos/tv.m4v" type="video/mp4" />
+                    <source src="videos/tv.m4v" type="video/mp4" />
                 </video>
             </div>
         </div>
     </section>
 
-    <div class="divider"></div>
+    <div class="divider" #phoneDivider></div>
 
-    <section class="phone-section">
-        <div class="text-container">
-            <h1 class="title">Download your shows to watch offline</h1>
-            <p class="description">Save your favorites easily and always have something to watch.</p>
-        </div>
-
-        <div class="phone-container">
-            <img class="phone-image" fetchpriority="low" alt="phone-image" src="assets/images/phone.webp" />
-
-            <div class="download-container">
-                <div class="download-image-container">
-                    <img
-                        alt="download-image"
-                        fetchpriority="low"
-                        class="download-image"
-                        src="assets/images/download-image.webp" />
-                </div>
-
-                <div class="download-text-container">
-                    <label class="label">Stranger Things</label>
-                    <p class="text">Downloading...</p>
-                </div>
-
-                <div aria-hidden="true" class="download-icon"></div>
+    @defer (on viewport(phoneDivider)) {
+        <section class="phone-section">
+            <div class="text-container">
+                <h1 class="title">Download your shows to watch offline</h1>
+                <p class="description">Save your favorites easily and always have something to watch.</p>
             </div>
-        </div>
-    </section>
 
-    <div class="divider"></div>
+            <div class="phone-container">
+                <img class="phone-image" fetchpriority="low" alt="phone-image" src="images/phone.webp" />
 
-    <section class="device-section">
-        <div class="text-container">
-            <h1 class="title">Watch everywhere</h1>
-            <p class="description">Stream unlimited movies and TV shows on your phone, tablet, laptop, and TV.</p>
-        </div>
+                <div class="download-container">
+                    <div class="download-image-container">
+                        <img
+                            alt="download-image"
+                            fetchpriority="low"
+                            class="download-image"
+                            src="images/download-image.webp" />
+                    </div>
 
-        <div class="tile-container">
-            <img fetchpriority="low" class="tile-image" alt="device-image" src="assets/images/device.webp" />
+                    <div class="download-text-container">
+                        <label class="label">Stranger Things</label>
+                        <p class="text">Downloading...</p>
+                    </div>
 
-            <div class="video-container">
-                <video autoplay playsinline muted loop>
-                    <source src="assets/videos/device.m4v" type="video/mp4" />
-                </video>
+                    <div aria-hidden="true" class="download-icon"></div>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <div class="divider"></div>
+        <div class="divider"></div>
 
-    <section class="kids-section">
-        <div class="text-container">
-            <h1 class="title">Pavlix is also for kids</h1>
-            <p class="description">
-                Send kids on adventures with their favorite characters in a space made just for them—free with your
-                membership.
-            </p>
-        </div>
+        <section class="device-section">
+            <div class="text-container">
+                <h1 class="title">Watch everywhere</h1>
+                <p class="description">Stream unlimited movies and TV shows on your phone, tablet, laptop, and TV.</p>
+            </div>
 
-        <img fetchpriority="low" class="tile-image" alt="device-image" src="assets/images/kids-tile.webp" />
-    </section>
+            <div class="tile-container">
+                <img fetchpriority="low" class="tile-image" alt="device-image" src="images/device.webp" />
 
-    <div class="divider"></div>
+                <div class="video-container">
+                    <video autoplay playsinline muted loop>
+                        <source src="videos/device.m4v" type="video/mp4" />
+                    </video>
+                </div>
+            </div>
+        </section>
 
-    <section class="questions-section">
-        <h1 class="title">Frequently Asked Questions</h1>
+        <div class="divider"></div>
 
-        <app-accordion class="accordion" [items]="accordionItems"></app-accordion>
+        <section class="kids-section">
+            <div class="text-container">
+                <h1 class="title">Pavlix is also for kids</h1>
+                <p class="description">
+                    Send kids on adventures with their favorite characters in a space made just for them—free with your
+                    membership.
+                </p>
+            </div>
 
-        <p class="description">Ready to watch? Click on button below and enjoy your membership.</p>
+            <img fetchpriority="low" class="tile-image" alt="device-image" src="images/kids-tile.webp" />
+        </section>
 
-        <button class="button" role="button" routerLink="/titles">
-            Get Started <i class="fa fa-angle-right" aria-hidden="true"></i>
-        </button>
-    </section>
+        <div class="divider"></div>
+
+        <section class="questions-section">
+            <h1 class="title">Frequently Asked Questions</h1>
+
+            <app-accordion class="accordion" [items]="accordionItems"></app-accordion>
+
+            <p class="description">Ready to watch? Click on button below and enjoy your membership.</p>
+
+            <button class="button" role="button" routerLink="/titles">
+                Get Started <i class="fa fa-angle-right" aria-hidden="true"></i>
+            </button>
+        </section>
+    }
 </div>

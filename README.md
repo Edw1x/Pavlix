@@ -1,28 +1,27 @@
-# Pavlix: Angular Application for Exploring Top 100 IMDb Movies
+# Films
 
-## Description:
-Pavlix is a dynamic personal project built with Angular 17 that serves as both a showcase of my front-end development skills and a practical entry point for interview assessments. It leverages modern web technologies to deliver an engaging user experience for browsing and managing a curated list of the top 100 IMDb movies.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.0.4.
 
-# Key Features:
+## Development server
 
-* Interactive Interface: Navigate seamlessly through various pages, including a landing page, a favorites list for personalized movie selections, a comprehensive titles list, and detailed movie information displays. 
-* Data-Driven Content: Powered by the IMDb Top 100 Movies API from RapidAPI, Pavlix retrieves and presents up-to-date movie information, ensuring an enriched user experience. https://rapidapi.com/rapihub-rapihub-default/api/imdb-top-100-movies/details
-* Streamlined Development: Built with Angular 17, SignalStore for universal data storage, and RxJS for reactive programming patterns.
-* Enhanced Readability and Code Quality: Utilizing Prettier for code formatting and ESLint for linting, Pavlix prioritizes readability and adherence to best practices, enhancing its overall code quality.
-* Modern Aesthetics: Font Awesome icons provide elegant visual cues and enhance the user interface.
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
-# Getting Started:
+## Code scaffolding
 
-* 1. Clone the Repository:
-Using your preferred Git client, clone the Pavlix repository to your local machine.
+Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-* 2. Install Dependencies:
-Navigate to the project directory in your terminal and execute the following command:
-```
-npm i
-```
-* 3. Run the Application:
-With your dependencies installed, start the development server using:
-```
-ng serve
-```
+## Build
+
+Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+
+## Running unit tests
+
+Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+
+## Running end-to-end tests
+
+Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+
+## Further help
+
+To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.

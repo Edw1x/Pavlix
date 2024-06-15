@@ -1,5 +1,6 @@
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
-import { ApplicationConfig } from '@angular/core';
+import { ApplicationConfig, provideExperimentalZonelessChangeDetection } from '@angular/core';
+import { provideClientHydration } from '@angular/platform-browser';
 import {
     InMemoryScrollingFeature,
     InMemoryScrollingOptions,
@@ -22,6 +23,8 @@ export const appConfig: ApplicationConfig = {
     providers: [
         provideRouter(routes, inMemoryScrollingFeature),
         provideHttpClient(withInterceptors([ApiInterceptor])),
+        provideClientHydration(),
+        provideExperimentalZonelessChangeDetection(),
         TitlesStore,
     ],
 };
