@@ -1,5 +1,6 @@
 import { debounceTime, distinctUntilChanged, map } from 'rxjs';
 
+import { NgOptimizedImage } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -16,7 +17,7 @@ export type SearchForm = FormGroup<{
 @Component({
     selector: 'app-title-list',
     standalone: true,
-    imports: [TitleCardComponent, ReactiveFormsModule, LoadingIndicatorComponent, ScrollTopDirective],
+    imports: [TitleCardComponent, ReactiveFormsModule, LoadingIndicatorComponent, ScrollTopDirective, NgOptimizedImage],
     templateUrl: './title-list.component.html',
     styleUrl: './title-list.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,

@@ -26,6 +26,7 @@
     }
 
     .tile-image {
+        position: relative !important;
         width: 100%;
     }
 
@@ -53,8 +54,6 @@
 
         .hero-image {
             position: absolute;
-            height: 100%;
-            width: 100%;
             object-fit: cover;
         }
 
@@ -125,7 +124,7 @@
             position: relative;
 
             .phone-image {
-                width: 100%;
+                position: relative !important;
             }
 
             .download-container {
